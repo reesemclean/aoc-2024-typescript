@@ -10,15 +10,11 @@
     "bootstrap-day": "node  --env-file=.env --import tsx ./src/utils/bootstrap-day.ts",
     "lint": "eslint ./src",
     "prettier": "prettier --write ./",
-    "prepare": "husky install",
-    "commit": "git-cz"
+    "prepare": "husky install"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/cli": "18.4.3",
-    "@commitlint/config-conventional": "18.4.3",
-    "@commitlint/cz-commitlint": "18.4.3",
     "@types/node": "20.10.1",
     "@typescript-eslint/eslint-plugin": "6.13.1",
     "@typescript-eslint/parser": "6.13.1",
@@ -32,10 +28,5 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
-  },
-  "config": {
-    "commitizen": {
-      "path": "@commitlint/cz-commitlint"
-    }
   }
 }
