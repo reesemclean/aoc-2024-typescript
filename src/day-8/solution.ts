@@ -113,6 +113,7 @@ export function solvePartTwo(input: string): string {
 
       let multiplier = 0;
 
+      /* eslint-disable no-constant-condition */
       while (true) {
         const nextAbovePosition = {
           x: position1.x + multiplier * dx,

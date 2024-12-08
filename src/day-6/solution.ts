@@ -1,14 +1,12 @@
 export const expectedPartOneSampleOutput = '41';
 
 const directions = ['^', '>', 'v', '<'];
-const rotatedDirections = ['<', '^', '>', 'v'];
 
 export function solvePartOne(input: string): string {
   const lines = input.split('\n');
 
   const grid: string[][] = [];
   const hitIndexes: { row: number; col: number }[] = [];
-  let duplicateCount = 0;
 
   for (const line of lines) {
     const row = [];
@@ -37,12 +35,11 @@ export function solvePartOne(input: string): string {
 
     if (
       !hitIndexes.some(
-        (index) => index.row === foundIndex.row && index.col === foundIndex.col,
+        (index) =>
+          index.row === foundIndex!.row && index.col === foundIndex!.col,
       )
     ) {
       hitIndexes.push(foundIndex);
-    } else {
-      duplicateCount += 1;
     }
 
     if (newGrid[foundIndex.row][foundIndex.col] === '^') {
@@ -92,6 +89,7 @@ export function solvePartOne(input: string): string {
 
   let currentGrid = grid;
 
+  /* eslint-disable no-constant-condition */
   while (true) {
     const newGrid = nextStep(currentGrid);
     if (!newGrid) {
@@ -249,63 +247,4 @@ export function solvePartTwo(input: string): string {
 
   console.log({ found });
   return found.length.toString();
-}
-
-function nextStep(grid: string[][]) {
-  const newGrid = grid.map((row) => [...row]);
-  let foundIndex: { row: number; col: number } | null = null;
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[i].length; j++) {
-      const cell = grid[i][j];
-      if (!directions.includes(cell)) {
-        continue;
-      }
-
-      foundIndex = { row: i, col: j };
-    }
-  }
-
-  if (!foundIndex) {
-    return null;
-  }
-
-  if (newGrid[foundIndex.row][foundIndex.col] === '^') {
-    if (foundIndex.row - 1 < 0) {
-      return null;
-    } else if (newGrid[foundIndex.row - 1][foundIndex.col] === '#') {
-      newGrid[foundIndex.row][foundIndex.col] = '>';
-    } else {
-      newGrid[foundIndex.row - 1][foundIndex.col] = '^';
-      newGrid[foundIndex.row][foundIndex.col] = '.';
-    }
-  } else if (newGrid[foundIndex.row][foundIndex.col] === '>') {
-    if (foundIndex.col + 1 >= newGrid[foundIndex.row].length) {
-      return null;
-    } else if (newGrid[foundIndex.row][foundIndex.col + 1] === '#') {
-      newGrid[foundIndex.row][foundIndex.col] = 'v';
-    } else {
-      newGrid[foundIndex.row][foundIndex.col + 1] = '>';
-      newGrid[foundIndex.row][foundIndex.col] = '.';
-    }
-  } else if (newGrid[foundIndex.row][foundIndex.col] === 'v') {
-    if (foundIndex.row + 1 >= newGrid.length) {
-      return null;
-    } else if (newGrid[foundIndex.row + 1][foundIndex.col] === '#') {
-      newGrid[foundIndex.row][foundIndex.col] = '<';
-    } else {
-      newGrid[foundIndex.row + 1][foundIndex.col] = 'v';
-      newGrid[foundIndex.row][foundIndex.col] = '.';
-    }
-  } else if (newGrid[foundIndex.row][foundIndex.col] === '<') {
-    if (foundIndex.col - 1 < 0) {
-      return null;
-    } else if (newGrid[foundIndex.row][foundIndex.col - 1] === '#') {
-      newGrid[foundIndex.row][foundIndex.col] = '^';
-    } else {
-      newGrid[foundIndex.row][foundIndex.col - 1] = '<';
-      newGrid[foundIndex.row][foundIndex.col] = '.';
-    }
-  }
-
-  return newGrid;
 }

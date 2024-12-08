@@ -146,7 +146,7 @@ export function solvePartTwo(input: string): string {
     }
   }
 
-  let fixedUpdates: number[][] = [];
+  const fixedUpdates: number[][] = [];
 
   for (const update of unsafeUpdates) {
     const relevantRules = rules.filter((rule) => {
