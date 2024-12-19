@@ -1,0 +1,93 @@
+5 A=64
+
+A mod 8 -> B -> B is between 0 and 7
+B XOR 5 -> B -> B is one of the values below (CHART A)
+A / 2 ^ B -> C
+B XOR C -> B
+A / 8 -> A
+B XOR 6 -> B
+OUTPUT B % 8
+JUMP TO Start if A is not zero
+
+In order for A to be zero and halt the program,
+A must be 0, 1, 2, 3, 4, 5, 6, or 7.
+We can find which value it is by running the program with each
+of those as the A register and seeing which outputs the last value
+the program outputs (0 in our case).
+
+The value of A that makes this happen is 3.
+
+So now we work backwards... in order for A to be 3 at the end of A
+cycle, A must be one of:
+
+3 * 8 + 0 = 24
+3 * * + 1 = 25
+3 * 8 + 2 = 26
+3 * 8 + 3 = 27
+3 * 8 + 4 = 28
+3 * 8 + 5 = 29
+3 * 8 + 6 = 30
+3 * 8 + 7 = 31
+
+We can find which values it might be by running the program with each
+of these as the A register and see which outputs the last two values
+of our program (3, 0).
+
+The values of A that make this happen is 24, 25, 29, 31
+
+
+
+Going into the last Iteration A is 3.
+Going into the second to last iteration, A must be 24 - 31
+because A / 8 = 3.
+
+
+
+The last iteration A must be less than 8.
+Choices for A at the start of the last iteration:
+0
+1
+2
+3 <====
+4
+5
+6
+7
+At the end, B % 8 = 0 and A = 0
+
+So that means after B XOR 6 the last 3 binary digits of B are 000
+So that means before B XOR 6 the the last 3 binary digits of B are 001
+
+
+0110 = 6
+
+*
+
+B is between 0 and 7 
+
+1000
+0111
+0100
+0101
+0011
+0010
+0001
+0000
+
+B = 111
+
+5 = 0101
+
+CHART A
+1101 = 13
+0010 = 2
+0001 = 1
+0000 = 0
+0110 = 6
+0111 = 7
+0100 = 4
+0101 = 5
+
+
+
+100
