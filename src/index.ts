@@ -50,7 +50,7 @@ if (!part || part === '1') {
   const input = await readFile(inputPath, 'utf8');
 
   console.time('Duration');
-  const partOneAnswer = await solvePartOne(input);
+  const partOneAnswer = await solvePartOne(input, test);
 
   if (test) {
     assertTestResult(partOneAnswer, expectedPartOneSampleOutput, '1');
@@ -80,7 +80,7 @@ if (!part || part === '2') {
   const input = await readFile(inputPath, 'utf8');
 
   console.time('Duration');
-  const partTwoAnswer = await solvePartTwo(input);
+  const partTwoAnswer = await solvePartTwo(input, test);
 
   if (test) {
     assertTestResult(partTwoAnswer, expectedPartTwoSampleOutput, '2');
